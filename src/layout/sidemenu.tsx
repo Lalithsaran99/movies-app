@@ -50,21 +50,6 @@ export const SideMenu: React.FC = () => {
               {MovieType.UPCOMING}
             </a>
           </li>
-          <li
-            className="nav-item cursor-pointer"
-            onClick={() =>
-              navigate(`/${MovieType.FAVORITES.toLocaleLowerCase()}`)
-            }
-          >
-            <a
-              className="nav-link"
-              onClick={() =>
-                navigate(`/${MovieType.FAVORITES.toLocaleLowerCase()}`)
-              }
-            >
-              {MovieType.FAVORITES}
-            </a>
-          </li>
         </ul>
       </div>
     </nav>

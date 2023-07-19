@@ -10,17 +10,13 @@ import {
   Routes,
 } from "react-router-dom";
 import { Grid } from "./views/grid";
+import { Routing } from "./routing";
 
 const App: React.FC = () => {
   return (
     <Router>
       <Layout>
-        <Routes>
-          <Route path="/" element={<Outlet />}>
-            <Route index path="/:movieType" element={<Grid />} />
-            <Route path="/" element={<Grid />} />
-          </Route>
-        </Routes>
+        <Routing />
       </Layout>
     </Router>
   );

@@ -1,22 +1,25 @@
+import { Movies } from "../utils/type";
+import { Image } from "./image";
 import "./styles.css";
-export const Card = () => {
-  return (
-    <div className="card-style card bg-light text-dark w-100 h-100">
-      <img src="logo512.png" className="w-100 h-100 card-img" alt="..." />
-      <div className="card-img-overlay w-100 h-100">
-        <div className="d-flex justify-content-between">
-          <h5 className="card-title">Card title</h5>
+interface CardProps {
+  movie: Movies;
+}
 
-          <button type="button" className="btn btn-dark rounded-circle">
-            4.3
+export const Card: React.FC<CardProps> = ({ movie }) => {
+  return (
+    <div className="card-style inner-shadow card bg-light text-light w-100 h-100">
+      <Image imgUrl={movie?.poster_path} />
+      <div className="card-img-overlay w-100 h-100">
+        <div className="d-flex justify-content-between align-items-center">
+          <h5 className="card-title">{movie?.title}</h5>
+
+          <div className="d-flex justify-content-center rounded-circle bg-dark p-2 w-auto h-auto">
+            {movie?.vote_average}
             <i className="bi bi-star-fill star-icon"></i>
-          </button>
+          </div>
         </div>
-        <p className="card-text">
-          This is a wider card with supporting text below as a natural lead-in
-          to additional content. This content is a little bit longer.
-        </p>
-        <p className="card-text">Last updated 3 mins ago</p>
+        {/* <p className="card-text">{movie?.overview}</p> */}
+        {/* <p className="card-text">Last updated 3 mins ago</p> */}
       </div>
     </div>
   );
