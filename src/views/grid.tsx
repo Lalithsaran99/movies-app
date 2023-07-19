@@ -4,10 +4,12 @@ import { fetchData } from "../utils/movie-api";
 import { Movies } from "../utils/type";
 import { Card } from "./card";
 import { Search } from "./search";
+
 export const Grid: React.FC = () => {
   const params = useParams<{ movieType: string }>();
   const [data, setData] = useState<Movies[] | undefined>();
   const [search, setSearch] = useState<string>();
+
   useEffect(() => {
     const fetchMovies = async () => {
       const data = await fetchData(
@@ -17,7 +19,8 @@ export const Grid: React.FC = () => {
       setData(data);
     };
     fetchMovies();
-  }, [params, search]);  
+  }, [params, search]);
+
   return (
     <>
       <div className="search-bg d-flex align-items-center justify-content-center">
