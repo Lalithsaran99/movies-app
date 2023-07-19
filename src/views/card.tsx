@@ -20,8 +20,6 @@ export const Card: React.FC<CardProps> = ({ movie }) => {
               <i className="bi bi-star-fill star-icon"></i>
             </div>
           </div>
-          {/* <p className="card-text">{movie?.overview}</p> */}
-          {/* <p className="card-text">Last updated 3 mins ago</p> */}
         </div>
       </div>
     </Link>

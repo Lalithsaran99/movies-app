@@ -11,6 +11,7 @@ export const MovieDetails = () => {
   const navigate = useNavigate();
   const [movie, setMovie] = useState<Movies>();
   const [cast, setCast] = useState<CastDetails[]>();
+
   useEffect(() => {
     const fetchDetail = async () => {
       const data = await fetchMovieDetail(params?.id ? params?.id : "");
@@ -28,6 +29,7 @@ export const MovieDetails = () => {
   const handleGoBack = () => {
     navigate(-1);
   };
+
   return (
     <div>
       <img
