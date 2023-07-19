@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchData } from "../utils/movie-api";
+import { fetchData } from "../utils/movies-api";
 import { Movies } from "../utils/type";
 import { Card } from "./card";
 import { Search } from "./search";

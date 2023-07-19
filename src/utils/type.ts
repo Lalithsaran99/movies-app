@@ -10,6 +10,18 @@ export const movieTypeApi = {
   upcoming: "/movie/upcoming?",
 };
 
+export interface Genres {
+  id: number;
+  name: string;
+}
+
+export interface CastDetails {
+  id: number;
+  name: string;
+  character: string;
+  profile_path: string;
+}
+
 export interface Movies {
   id: string;
   title: string;
@@ -18,4 +30,6 @@ export interface Movies {
   vote_average: number;
   overview: string;
   poster_path: string;
+  backdrop_path?: string;
+  genres?: Genres[];
 }

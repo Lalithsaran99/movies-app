@@ -1,0 +1,39 @@
+.title-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.card.image-scroll-card {
+    overflow: hidden;
+}
+
+.card.image-scroll-card img {
+    transition: transform 0.3s ease;
+}
+
+.card.image-scroll-card:hover img {
+    transform: translateX(-20%);
+}
+
+.row.flex-nowrap {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.card.horizontal-scroll-card {
+    display: inline-block;
+    margin-right: 10px;
+    flex: 0 0 auto;
+    width: 300px;
+}
+
+.back-button {
+    position: fixed;
+    left: 25%;
+    z-index: 9999;
+}
