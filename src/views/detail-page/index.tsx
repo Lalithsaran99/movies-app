@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Loader } from "../../loader/normal-loader";
 import { FetchCastApi } from "../../utils/cast-api";
+import { formatDate } from "../../utils/format-date";
 import { fetchMovieDetail } from "../../utils/movie-api";
 import { CastDetails, Movies } from "../../utils/type";
 import { Cast } from "./cast";
 import "./styles.css";
-import { Loader } from "../../loader/normal-loader";
 
 export const MovieDetails = () => {
   const params = useParams<{ id: string }>();
@@ -70,7 +71,7 @@ export const MovieDetails = () => {
         </div>
         <div className="text-center m-2">
           <button type="button" className="btn btn-primary rounded-pill">
-            {movie?.release_date}
+            {formatDate(movie?.release_date as unknown as string)}
           </button>
         </div>
       </div>
