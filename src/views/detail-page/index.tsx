@@ -5,30 +5,40 @@ import { fetchMovieDetail } from "../../utils/movie-api";
 import { CastDetails, Movies } from "../../utils/type";
 import { Cast } from "./cast";
 import "./styles.css";
+import { Loader } from "../../loader/normal-loader";
 
 export const MovieDetails = () => {
   const params = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [movie, setMovie] = useState<Movies>();
   const [cast, setCast] = useState<CastDetails[]>();
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    if (!params?.id) return;
     const fetchDetail = async () => {
-      const data = await fetchMovieDetail(params?.id ? params?.id : "");
-      setMovie(data);
+      await fetchMovieDetail(params?.id ? params?.id : "").then((res) => {
+        setMovie(res?.data);
+        setLoading(false);
+      });
     };
     fetchDetail();
 
     const fetchCastDetail = async () => {
-      const data = await FetchCastApi(params?.id ? params?.id : "");
-      setCast(data);
+      await FetchCastApi(params?.id ? params?.id : "").then((data) => {
+        setCast(data);
+      });
     };
     fetchCastDetail();
-  }, []);
+  }, [params?.id]);
 
   const handleGoBack = () => {
     navigate(-1);
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div>
@@ -39,31 +49,34 @@ export const MovieDetails = () => {
       />
       <button
         type="button"
-        className="back-button btn btn-primary rounded-circle"
+        className="position-absolute top-20 start-0 m-3 md:m-5 btn btn-primary p-10 rounded-circle"
         onClick={handleGoBack}
       >
         <i className="bi bi-arrow-left-circle"></i>
       </button>
       <div className="title-text">
-        <h1 className="position-absolute p-2">{movie?.title}</h1>
-      </div>
-      <p className="text-center">{movie?.overview}</p>
-      <div className="text-center">
-        {movie?.genres?.map((data) => (
-          <button
-            type="button"
-            key={data?.id}
-            className="btn btn-primary rounded-pill m-1"
-          >
-            {data?.name}
+        <h1>{movie?.title}</h1>
+
+        <div className="text-center">
+          {movie?.genres?.map((data) => (
+            <button
+              type="button"
+              key={data?.id}
+              className="btn btn-primary rounded-pill m-1"
+            >
+              {data?.name}
+            </button>
+          ))}
+        </div>
+        <div className="text-center m-2">
+          <button type="button" className="btn btn-primary rounded-pill">
+            {movie?.release_date}
           </button>
-        ))}
+        </div>
       </div>
-      <div className="text-center m-2">
-        <button type="button" className="btn btn-primary rounded-pill">
-          {movie?.release_date}
-        </button>
-      </div>
+
+      <p className="text-center p-5">{movie?.overview}</p>
+
       <div className="container py-5">
         <div className="row gutter-3  flex-nowrap overflow-auto">
           {cast?.map((castDetail) => (

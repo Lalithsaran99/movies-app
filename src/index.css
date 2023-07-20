@@ -11,6 +11,10 @@ body {
   cursor: pointer;
 }
 
+.no-horizontal-scrollbar {
+  overflow-x: hidden;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

@@ -15,6 +15,11 @@ export interface Genres {
   name: string;
 }
 
+export interface Genres {
+  id: number;
+  name: string;
+}
+
 export interface CastDetails {
   id: number;
   name: string;
