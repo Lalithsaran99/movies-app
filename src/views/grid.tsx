@@ -1,13 +1,14 @@
+import { capitalize } from "lodash";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Loader } from "../loader/normal-loader";
+import { fetchGenreList } from "../utils/genre-list";
 import { fetchData } from "../utils/movies-api";
 import { Genres, Movies } from "../utils/type";
 import { Card } from "./card";
+import { Empty } from "./no-data";
 import { Search } from "./search";
 import { YearDropdown } from "./year-select";
-import { Loader } from "../loader/normal-loader";
-import { capitalize } from "lodash";
-import { fetchGenreList } from "../utils/genre-list";
 
 export const Grid: React.FC = () => {
   const params = useParams<{ movieType: string }>();
@@ -79,8 +80,6 @@ export const Grid: React.FC = () => {
     fetchMovies();
   }, [params, search, currentPage, year, genreId]);
 
-  console.log(genreId);
-
   return (
     <>
       <div className="search-bg d-flex align-items-center justify-content-center">
@@ -112,20 +111,25 @@ export const Grid: React.FC = () => {
           ))}
         </div>
       ) : null}
-
-      <div className="row g-5 m-0">
-        {data?.map((movie, index) => (
-          <div className="col-sm-2 col-md-4 col-lg-2" key={index}>
-            <Card movie={movie} />
-          </div>
-        ))}
-        {isLoading && (
-          <div className="p-2">
-            <Loader />
-          </div>
-        )}
-        <div className="end-of-page-marker h-25" />
-      </div>
+      {data?.length ? (
+        <div className="row g-5 m-0">
+          {data?.map((movie, index) => (
+            <div className="col-sm-2 col-md-4 col-lg-2" key={index}>
+              <Card movie={movie} />
+            </div>
+          ))}
+          {isLoading && (
+            <div className="p-2">
+              <Loader />
+            </div>
+          )}
+          <div className="end-of-page-marker h-25" />
+        </div>
+      ) : isLoading ? (
+        <Loader />
+      ) : (
+        <Empty />
+      )}
     </>
   );
 };
