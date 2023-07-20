@@ -5,10 +5,11 @@ import { Loader } from "../loader/normal-loader";
 import { fetchGenreList } from "../utils/genre-list";
 import { fetchData } from "../utils/movies-api";
 import { Genres, Movies } from "../utils/type";
-import { Card } from "./card";
+import { GridView } from "./grid-view";
 import { Empty } from "./no-data";
 import { Search } from "./search";
 import { YearDropdown } from "./year-select";
+import { GenresUI } from "./genres";
 
 export const Grid: React.FC = () => {
   const params = useParams<{ movieType: string }>();
@@ -92,39 +93,10 @@ export const Grid: React.FC = () => {
         {movieType ? capitalize(movieType) : "Home"}
       </h1>
       {movieType === "genres" || movieType === undefined ? (
-        <div className="text-center">
-          {genres?.map((data) => (
-            <button
-              type="button"
-              value={String(data?.id)}
-              name={String(data?.id)}
-              key={data?.id}
-              onClick={(e) => setGenreId(e.currentTarget.value)}
-              className={
-                genreId === String(data?.id)
-                  ? "btn btn-dark rounded-pill m-1"
-                  : "btn btn-primary rounded-pill m-1"
-              }
-            >
-              {data?.name}
-            </button>
-          ))}
-        </div>
+        <GenresUI genres={genres} setGenreId={setGenreId} />
       ) : null}
       {data?.length ? (
-        <div className="row g-5 m-0">
-          {data?.map((movie, index) => (
-            <div className="col-sm-2 col-md-4 col-lg-2" key={index}>
-              <Card movie={movie} />
-            </div>
-          ))}
-          {isLoading && (
-            <div className="p-2">
-              <Loader />
-            </div>
-          )}
-          <div className="end-of-page-marker h-25" />
-        </div>
+        <GridView data={data} loading={isLoading} />
       ) : isLoading ? (
         <Loader />
       ) : (
