@@ -3,6 +3,8 @@ import { addToFavorite } from "../utils/add-to-favorite";
 import { AddToFavorite, Movies } from "../utils/type";
 import { Image } from "./image";
 import "./styles.css";
+import { useState } from "react";
+import { Loader } from "../loader/normal-loader";
 interface CardProps {
   movie: Movies;
   isFavorite?: boolean;
@@ -10,14 +12,19 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ movie, isFavorite }) => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
   const onAddRemoveFavorites = async (favorite: boolean) => {
     try {
+      setLoading(true);
       const data: AddToFavorite = {
         media_type: "movie",
         media_id: movie?.id as unknown as number,
         favorite,
       };
-      await addToFavorite(data).then((res) => alert(res?.data?.status_message));
+      await addToFavorite(data).then((res) => {
+        alert(res?.data?.status_message);
+        setLoading(false);
+      });
     } catch (error) {
       alert(error);
     }
@@ -36,26 +43,34 @@ export const Card: React.FC<CardProps> = ({ movie, isFavorite }) => {
             <div className="text-end">
               <button
                 type="button"
-                className="btn btn-dark rounded-circle"
+                className={`btn btn-dark rounded-circle ${
+                  loading ? "disabled" : ""
+                }`}
                 onClick={(e) => {
                   e.stopPropagation();
                   onAddRemoveFavorites(false);
                 }}
               >
-                <i className="bi bi-x-lg"></i>
+                {loading ? <Loader /> : <i className="bi bi-x-lg"></i>}
               </button>
             </div>
           ) : (
             <div className="text-end">
               <button
                 type="button"
-                className="btn btn-dark rounded-circle"
+                className={`btn btn-dark rounded-circle ${
+                  loading ? "disabled" : ""
+                }`}
                 onClick={(e) => {
                   e.stopPropagation();
                   onAddRemoveFavorites(true);
                 }}
               >
-                {<i className="bi bi-star star-icon"></i>}
+                {loading ? (
+                  <Loader />
+                ) : (
+                  <i className="bi bi-star star-icon"></i>
+                )}
               </button>
             </div>
           )}
