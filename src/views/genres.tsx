@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Genres } from "../utils/type";
 
 interface GenreProps {
@@ -8,6 +8,14 @@ interface GenreProps {
 
 export const GenresUI: React.FC<GenreProps> = ({ genres, setGenreId }) => {
   const [id, setId] = useState<string>();
+
+  useEffect(() => {
+    if (!genres?.length) return;
+    if (!id) {
+      setId(String(genres[0]?.id));
+    }
+  }, [genres, id]);
+
   return (
     <div className="text-center">
       {genres?.map((data) => (
