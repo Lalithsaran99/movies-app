@@ -69,6 +69,14 @@ export const Header: React.FC<HeaderProps> = ({ setIsCollapsed }) => {
                   {MovieType.UPCOMING}
                 </a>
               </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link text-light cursor-pointer"
+                  onClick={() => handleMenuItemClick("favorites")}
+                >
+                  Favorites
+                </a>
+              </li>
             </ul>
           </div>
         </div>

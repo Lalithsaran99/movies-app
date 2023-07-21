@@ -15,6 +15,12 @@ export interface Genres {
   name: string;
 }
 
+export interface AddToFavorite {
+  media_type: string;
+  media_id: number;
+  favorite: boolean;
+}
+
 export interface Genres {
   id: number;
   name: string;
@@ -28,7 +34,7 @@ export interface CastDetails {
 }
 
 export interface Movies {
-  id: string;
+  id: number;
   title: string;
   release_date: string;
   vote_count: number;

@@ -13,7 +13,7 @@ export const Cast: React.FC<CastProps> = ({ cast }) => {
         src={
           cast?.profile_path
             ? `https://image.tmdb.org/t/p/w500${cast?.profile_path}`
-            : "../logo512.png"
+            : "../empty.jpg"
         }
         className="card-img-top"
         alt="Image 1"

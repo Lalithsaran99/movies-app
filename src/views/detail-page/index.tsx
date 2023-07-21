@@ -4,9 +4,10 @@ import { Loader } from "../../loader/normal-loader";
 import { FetchCastApi } from "../../utils/cast-api";
 import { formatDate } from "../../utils/format-date";
 import { fetchMovieDetail } from "../../utils/movie-api";
-import { CastDetails, Movies } from "../../utils/type";
+import { AddToFavorite, CastDetails, Movies } from "../../utils/type";
 import { Cast } from "./cast";
 import "./styles.css";
+import { addToFavorite } from "../../utils/add-to-favorite";
 
 export const MovieDetails = () => {
   const params = useParams<{ id: string }>();

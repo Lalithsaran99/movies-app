@@ -1,6 +1,5 @@
 import React, { ReactNode, useState } from "react";
 import { Header } from "./header";
-import { SideMenu } from "./sidemenu";
 import "./styles.css";
 
 interface LayoutProps {
@@ -8,7 +7,6 @@ interface LayoutProps {
 }
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [collapse, setCollapse] = useState<boolean>(true);
-  console.log(collapse)
   return (
     <div className="no-horizontal-scrollbar">
       <Header setIsCollapsed={setCollapse} />
