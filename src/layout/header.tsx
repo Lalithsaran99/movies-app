@@ -3,8 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { MovieType } from "../utils/type";
 interface HeaderProps {
   setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+  theme: () => void;
+  mode: boolean;
 }
-export const Header: React.FC<HeaderProps> = ({ setIsCollapsed }) => {
+export const Header: React.FC<HeaderProps> = ({
+  setIsCollapsed,
+  theme,
+  mode,
+}) => {
   const navigate = useNavigate();
 
   const [collapse, setCollapse] = useState<boolean>(true);
@@ -21,7 +27,7 @@ export const Header: React.FC<HeaderProps> = ({ setIsCollapsed }) => {
   return (
     <header>
       <nav
-        className="d-md-block navbar navbar-expand-lg navbar-dark bg-dark w-100"
+        className="d-md-block navbar navbar-expand-lg w-100"
         style={{ position: "fixed", width: "100%", zIndex: 30 }}
       >
         <div className="container">
@@ -47,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({ setIsCollapsed }) => {
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
                 <a
-                  className="nav-link text-light cursor-pointer"
+                  className="nav-link cursor-pointer"
                   onClick={() => handleMenuItemClick(MovieType.GENRES)}
                 >
                   {MovieType.GENRES}
@@ -55,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({ setIsCollapsed }) => {
               </li>
               <li className="nav-item">
                 <a
-                  className="nav-link text-light cursor-pointer"
+                  className="nav-link cursor-pointer"
                   onClick={() => handleMenuItemClick(MovieType.TRENDING)}
                 >
                   {MovieType.TRENDING}
@@ -63,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({ setIsCollapsed }) => {
               </li>
               <li className="nav-item">
                 <a
-                  className="nav-link text-light cursor-pointer"
+                  className="nav-link cursor-pointer"
                   onClick={() => handleMenuItemClick(MovieType.UPCOMING)}
                 >
                   {MovieType.UPCOMING}
@@ -71,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({ setIsCollapsed }) => {
               </li>
               <li className="nav-item">
                 <a
-                  className="nav-link text-light cursor-pointer"
+                  className="nav-link cursor-pointer"
                   onClick={() => handleMenuItemClick("favorites")}
                 >
                   Favorites
@@ -79,6 +85,13 @@ export const Header: React.FC<HeaderProps> = ({ setIsCollapsed }) => {
               </li>
             </ul>
           </div>
+          <button type="button" onClick={theme} className="btn btn-primary">
+            {mode ? (
+              <i className="bi bi-moon-stars-fill"></i>
+            ) : (
+              <i className="bi bi-cloud-sun-fill"></i>
+            )}
+          </button>
         </div>
       </nav>
     </header>
